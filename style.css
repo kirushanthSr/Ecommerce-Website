@@ -213,12 +213,12 @@ body {
   box-shadow: 20px 20px 34px rgba(0, 0, 0, 0.09);
   border-radius: 10px;
   margin: 15px 0;
-  transition: 0.5s ease;
-  border: 2px solid black;
+  transition: 0.8s ease;
+  border: 0px solid black;
 }
 
 #feature .fe-box:hover {
-  box-shadow: 10px 10px 54px rgba(0, 0, 0, 0.178);
+  box-shadow: 10px 10px 54px rgba(0, 0, 0, 0.2);
 }
 
 #feature .fe-box img{
@@ -455,6 +455,7 @@ body {
   background-repeat: no-repeat;
   background-position: 20% 30%;
   background-color: #222;
+  margin-bottom: 0;
 }
 
 #newsletter h4{
@@ -766,6 +767,10 @@ footer .copyright{
   padding-bottom: 90px;
 }
 
+#blog .blog-box p{
+  color:#333;
+}
+
 #blog .blog-img{
   width: 50%;
   margin-right: 40px;
@@ -815,4 +820,40 @@ footer .copyright{
   font-size: 70px;
   font-weight: 700;
   color: #333;
+}
+
+/* aboutpage */
+
+#page-header.about-header{
+  background-image: url(./img/about/banner.png);
+}
+
+#about-head img{
+  width: 50%;
+  height: auto;
+}
+
+#about-head {
+  display: flex;
+  align-items: center;
+}
+
+#about-head div{
+  padding-left: 40px;
+}
+
+#about-app{
+  text-align: center;
+}
+
+#about-app .video{
+  width: 70%;
+  height: 100%;
+  margin: 30px auto 0 auto;
+}
+
+#about-app .video video{
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
 }
