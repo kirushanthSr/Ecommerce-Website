@@ -36,7 +36,7 @@ h6 {
 
 p {
   font-size: 16px;
-  color: #465b52;
+  color: #2c2c2c;
   margin: 15px 0 20px 0;
 }
 
@@ -113,7 +113,7 @@ body {
 
 #navbar li a:hover,
 #navbar li a.active {
-  color: rgb(113, 175, 255);
+  color: #418a69;
 }
 
 #navbar li a.active::after,
@@ -121,7 +121,7 @@ body {
   content: "";
   width: 30%;
   height: 2px;
-  background: rgb(113, 175, 255);
+  background: #418a69;
   position: absolute;
   bottom: -4px;
   left: 20px;
@@ -237,6 +237,14 @@ body {
 
 #product1{
   text-align: center;
+}
+
+.pro a{
+  text-decoration: none;
+}
+
+#product1 p{
+  color: #000000;
 }
 
 #product1 .pro-container{

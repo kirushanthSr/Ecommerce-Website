@@ -15,7 +15,7 @@
 
     <body>
         <section id="header">
-            <a href="#" style="text-decoration: none;"><h4 style="color: rgb(0, 0, 0);">MR.BLACK</h2></a>
+            <a href="index.html" style="text-decoration: none;"><h4 style="color: rgb(0, 0, 0);">MR.BLACK</h2></a>
             <div>
                 <ul id="navbar">
                     <li><a href="index.html">Home</a></li>
@@ -39,7 +39,7 @@
         </section>
 
         <section id="cart-container" class="section-p1">
-            <table width="100%">
+            <!-- <table width="100%">
                 <thead>
                     <tr>
                         <td>Remove</td>
@@ -52,7 +52,7 @@
                 </thead>
 
                 <tbody>
-                    <td><a href="#"><i class="far fa-times-circle" style="color: red;"></i></a></td>
+                    <td><a href="#"><i class="far fa-times-circle" style="color: rgb(0, 0, 0); font-size: 25px;"></i></a></td>
                     <td><img src="./img/products/f1.jpg"></td>
                     <td>Cartoon Astronaut T-Shirts</td>
                     <td>$118.19</td>
@@ -77,7 +77,7 @@
                     <td><input type="number" value="1"></td>
                     <td>$118.19</td>
                 </tbody>
-            </table>
+            </table> -->
         </section>
 
         <section id="cart-add" class="section-p1">
@@ -105,9 +105,50 @@
                 <td><strong id="cart-total">$0.00</strong></td>
                 </tr>
             </table>
-            <button class="normal">Checkout</button>
+            <button class="normal" id="checkout-btn">Checkout</button>
             </div>
         </section>
+
+        <!-- Payment Modal -->
+        <div id="payment-modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.35); z-index:9999; align-items:center; justify-content:center;">
+            <div style="background:#fff; padding:32px 28px 28px 28px; border-radius:18px; max-width:410px; margin:auto; position:relative; box-shadow:0 8px 32px rgba(0,0,0,0.18); border:1px solid #e8f6ea;">
+                <button type="button" id="close-payment" style="position:absolute;top:14px;right:14px;background:none;border:none;font-size:22px;color:#888;cursor:pointer;"><i class="fa fa-times"></i></button>
+                <h2 style="margin-bottom:14px; color:#222; font-weight:700; letter-spacing:1px;">Secure Payment</h2>
+                <div style="margin-bottom:18px; text-align:center;">
+                    <img src="https://img.icons8.com/color/36/000000/visa.png" alt="Visa" style="vertical-align:middle; margin-right:4px;">
+                    <img src="https://img.icons8.com/color/36/000000/mastercard-logo.png" alt="Mastercard" style="vertical-align:middle; margin-right:4px;">
+                    <img src="https://img.icons8.com/color/36/000000/amex.png" alt="Amex" style="vertical-align:middle; margin-right:4px;">
+                    <img src="https://img.icons8.com/color/36/000000/paypal.png" alt="PayPal" style="vertical-align:middle;">
+                </div>
+                <form id="payment-form" style="display:flex;flex-direction:column;gap:8px;">
+                    <label style="font-weight:600; color:#333;">Email</label>
+                    <input type="email" required placeholder="you@email.com" style="width:100%;margin-bottom:2px;padding:10px 12px;border-radius:6px;border:1px solid #e0e0e0;font-size:15px;">
+                    <label style="font-weight:600; color:#333;">Name on Card</label>
+                    <input type="text" required placeholder="Full Name" style="width:100%;margin-bottom:2px;padding:10px 12px;border-radius:6px;border:1px solid #e0e0e0;font-size:15px;">
+                    <label style="font-weight:600; color:#333;">Card Number</label>
+                    <input type="text" maxlength="19" inputmode="numeric" pattern="\d{13,19}" required placeholder="1234 5678 9012 3456" style="width:100%;margin-bottom:2px;padding:10px 12px;border-radius:6px;border:1px solid #e0e0e0;font-size:15px;">
+                    <div style="display:flex; gap:10px;">
+                        <div style="flex:1;">
+                            <label style="font-weight:600; color:#333;">Expiry</label>
+                            <input type="text" maxlength="5" placeholder="MM/YY" pattern="\d{2}/\d{2}" required style="width:100%;margin-bottom:2px;padding:10px 12px;border-radius:6px;border:1px solid #e0e0e0;font-size:15px;">
+                        </div>
+                        <div style="flex:1;">
+                            <label style="font-weight:600; color:#333;">CVV</label>
+                            <input type="text" maxlength="4" pattern="\d{3,4}" required placeholder="123" style="width:100%;margin-bottom:2px;padding:10px 12px;border-radius:6px;border:1px solid #e0e0e0;font-size:15px;">
+                        </div>
+                    </div>
+                    <button type="submit" class="normal" style="width:100%;margin-bottom:8px;background:#418a69;color:#fff;font-weight:600;font-size:16px;letter-spacing:1px;border-radius:6px;">Pay Now</button>
+                    <div id="payment-spinner" style="display:none;text-align:center;margin-top:10px;">
+                        <i class="fa fa-spinner fa-spin" style="font-size:24px;color:#418a69;"></i>
+                        <div style="font-size:15px;">Processing payment...</div>
+                    </div>
+                    <div id="payment-success" style="display:none;text-align:center;margin-top:10px;color:#418a69;">
+                        <i class="fa fa-check-circle" style="font-size:28px;"></i>
+                        <div style="font-size:16px;font-weight:600;">Payment successful! Thank you for your purchase.</div>
+                    </div>
+                </form>
+            </div>
+        </div>
 
         <footer class="section-p1">
             <div class="footer-container">
@@ -163,6 +204,48 @@
         </footer>
 
         <script src="script.js"></script>
+        <script>
+        // Payment modal logic
+        const checkoutBtn = document.getElementById('checkout-btn');
+        const paymentModal = document.getElementById('payment-modal');
+        const closePayment = document.getElementById('close-payment');
+        const paymentForm = document.getElementById('payment-form');
+        const paymentSpinner = document.getElementById('payment-spinner');
+        const paymentSuccess = document.getElementById('payment-success');
+
+        if (checkoutBtn) {
+            checkoutBtn.onclick = function(e) {
+                e.preventDefault();
+                paymentModal.style.display = 'flex';
+                paymentForm.reset();
+                paymentSpinner.style.display = 'none';
+                paymentSuccess.style.display = 'none';
+            };
+        }
+        if (closePayment) {
+            closePayment.onclick = function() {
+                paymentModal.style.display = 'none';
+            };
+        }
+        if (paymentForm) {
+            paymentForm.onsubmit = function(e) {
+                e.preventDefault();
+                paymentSpinner.style.display = 'block';
+                paymentSuccess.style.display = 'none';
+                // Simulate payment processing
+                setTimeout(function() {
+                    paymentSpinner.style.display = 'none';
+                    paymentSuccess.style.display = 'block';
+                    // Clear cart after short delay
+                    setTimeout(function() {
+                        paymentModal.style.display = 'none';
+                        localStorage.removeItem('cart');
+                        window.location.reload();
+                    }, 1800);
+                }, 1800);
+            };
+        }
+        </script>
     </body>
 
 </html>
